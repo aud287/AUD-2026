@@ -156,3 +156,16 @@ img.cap2{width:120px;height:auto;font-size:0}
 .yh{display:flex;align-items:center;gap:12px}.yh .i3{width:72px;height:72px;margin:-34px 0 -8px;filter:drop-shadow(0 8px 6px #0003)}
 .yh small{font-weight:700;letter-spacing:.2em;color:var(--bur)}.yr h3{font-size:24px;margin:6px 0}.yr p{opacity:.85}
 @media(max-width:700px){.tl:before{left:20px}.yr{width:auto;margin:0 0 0 50px!important}.yr:before,.yr:nth-child(even):before{left:-41px;right:auto}}
+.soc i {
+  font-size: 24px;
+  width: 28px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.soc {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
