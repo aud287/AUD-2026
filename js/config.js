@@ -4,7 +4,7 @@
    or type any normal emoji. Full guide: README.md */
 window.SITE = {
   name: "CLASS OF 2026",
-  logo: "",                              // e.g. assets/logo.png  (empty = "YOUR LOGO" placeholder)
+  logo: "assets/logo.png",                              // e.g. assets/logo.png  (empty = "YOUR LOGO" placeholder)
   date: "2026-12-19T13:00:00",           // graduation date & time
   since: "2021-10-10",                   // "days since" counter
   music: "assets/audio/music.mp3",       // put your mp3 here (plays with the intro)
