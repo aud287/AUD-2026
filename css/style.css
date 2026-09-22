@@ -169,3 +169,10 @@ img.cap2{width:120px;height:auto;font-size:0}
   align-items: center;
   gap: 10px;
 }
+
+.playpen-sans-arabic-<uniquifier> {
+  font-family: "Playpen Sans Arabic", cursive;
+  font-optical-sizing: auto;
+  font-weight: <weight>;
+  font-style: normal;
+}
