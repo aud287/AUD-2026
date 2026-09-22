@@ -39,10 +39,10 @@ pizza | Late-night snacks | ∞
 brain | Facts memorized, then forgotten | ∞
 stethoscope | Promises of "just one more chapter" | ∞`,
 
-  social: `instagram=
-facebook=
-tiktok=
-whatsapp=`,
+  social: `instagram=https://www.instagram.com/aud_med_2026/
+facebook=https://www.facebook.com/profile.php?id=61583995127897
+tiktok=https://x.com/AudMed2026
+telegram=`,
 
   events: `coat | Senior Jacket Day | 2026-10-12 16:00 | Main Hall | Pick up your jacket and take the group photo.
 red_heart | Farewell | 2026-11-15 18:00 | Campus Garden | An evening to say goodbye to the years together.
@@ -51,7 +51,7 @@ camera_with_flash | Photo Session | 2026-12-05 10:00 | Faculty Steps | Official 
 microphone | Last Lecture | 2026-11-28 12:00 | Lecture Hall 1 | The final lecture of the final level.
 graduation_cap | Graduation Ceremony | 2026-12-19 13:00 | Grand Hall | The chapter is complete. Arrive by 12:00.`,
 
-  announce: `Senior Jacket Day is coming! | 12 Oct · Main Hall | | 2026-09-01 | 2026-10-12`,
+  announce: `Senior Jacket Day is coming! | SOON | | 2026-09-01 | 2026-10-12`,
 
   polls: `HOW MANY HOURS DID YOU SLEEP? | UNDER 4 HOURS | 4–6 HOURS | 6–8 HOURS | OVER 8 HOURS
 PRIMARY CAFFEINE SOURCE? | Coffee | Energy Drinks | Tea | Pure Willpower`,
