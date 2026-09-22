@@ -41,7 +41,7 @@ stethoscope | Promises of "just one more chapter" | ∞`,
 
   social: `instagram=https://www.instagram.com/aud_med_2026/
 facebook=https://www.facebook.com/profile.php?id=61583995127897
-X.com=https://x.com/AudMed2026
+X=https://x.com/AudMed2026
 telegram=`,
 
   events: `coat | Senior Jacket Day | SOON | HALL | Pick up your jacket and take the group photo.
