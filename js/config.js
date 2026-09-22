@@ -26,11 +26,11 @@ sleeping_face | SLEEP IS OPTIONAL
 brain | WHAT WAS THAT MNEMONIC AGAIN?
 party_popper | WE MADE IT`,
 
-  years: `books | YEAR 1 | Day One, Lost in the Halls | White coats, giant anatomy atlases, and finding the right lecture hall. Eventually.
-dna | YEAR 2 | The Basic Sciences Bootcamp | Physiology, biochemistry, and the birth of a lifelong coffee habit.
-microscope | YEAR 3 | Pathology Nights | Slides, mnemonics and study groups that ended at sunrise.
-hospital | YEAR 4 | First Time in the Wards | Real patients, real stethoscopes, and hearing "Doctor?" and looking behind us.
-graduation_cap | YEAR 5 | The Final Stretch | Exams, rotations, tears, laughs. And then, this.`,
+years: `books | YEAR 1 | Where It All Began | Basic sciences, endless lectures, and our first steps into the world of medicine.
+dna | YEAR 2 | Going Deeper | Cardio, respiratory, and the moment medicine started feeling a little more real.
+microscope | YEAR 3 | First Steps in the Hospital | Our first hospital days, first patients, first white coats, and the feeling of finally becoming doctors.
+hospital | YEAR 4 | Into the Real World | Internal medicine, surgery, long rounds, and lessons that went far beyond the lecture hall.
+graduation_cap | YEAR 5 | The Final Chapter | The final exams, the endless rotations, mandatory OB/GYN days, countless memories… and somehow, we made it here.` ,
 
   stats: `hot_beverage | Cups of coffee | ∞
 sleeping_face | Hours of sleep we never got | ∞
@@ -41,7 +41,7 @@ stethoscope | Promises of "just one more chapter" | ∞`,
 
   social: `instagram=https://www.instagram.com/aud_med_2026/
 facebook=https://www.facebook.com/profile.php?id=61583995127897
-tiktok=https://x.com/AudMed2026
+X.com=https://x.com/AudMed2026
 telegram=`,
 
   events: `coat | Senior Jacket Day | 2026-10-12 16:00 | Main Hall | Pick up your jacket and take the group photo.
@@ -53,7 +53,9 @@ graduation_cap | Graduation Ceremony | 2026-12-19 13:00 | Grand Hall | The chapt
 
   announce: `Senior Jacket Day is coming! | SOON | | 2026-09-01 | 2026-10-12`,
 
-  polls: `HOW MANY HOURS DID YOU SLEEP? | UNDER 4 HOURS | 4–6 HOURS | 6–8 HOURS | OVER 8 HOURS
+  polls: `خد من الكلية ايه؟ | مدمن كافيين | اقرعيت من الصلع الوراثي | بتسف بنادول | ارق ومعرفش انام  
+كام مره طبقت ف الامتحانات؟ | ولا مرة | مرتين او تلاتة | كتير | يعني ايه نوم  
+دمياط هتوحشك | لا | نو | طبعا لا | ممكن 
 PRIMARY CAFFEINE SOURCE? | Coffee | Energy Drinks | Tea | Pure Willpower`,
 
   cats: `FIRST DAY, SENIOR JACKET, GRADUATION JACKET, OSCE, EVENTS, LECTURES, HOSPITAL, CLINICAL YEARS, FRIENDS, TRIPS, PARTIES, FUNNY MOMENTS, GRADUATION`,
