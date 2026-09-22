@@ -182,9 +182,81 @@ $('#mf').onsubmit=async e=>{e.preventDefault();const n=clean($('#mn').value,30),
   bt.append(b,a);const ie=el('div','ei');ie.append(ic(x.e));c.append(ie,el('h3','',x.t),el('p','meta','📅 '+fmt(x.d)+' · '+x.d.slice(11,16)),el('p','meta','📍 '+(x.l||'')),i,bt);$('#ev').append(c)})})();
 
 /* ---- socials + announcements ---- */
-[['instagram','📸','Instagram'],['facebook','📘','Facebook'],['tiktok','🎵','TikTok'],['whatsapp','💬','WhatsApp']].forEach(([k,i,n])=>{const a=el('a','card glass soc');a.href=safe(CONFIG.socials[k])?CONFIG.socials[k]:'#';a.target='_blank';a.rel='noopener';a.append(el('span','',i),el('b','',n));$('#soc').append(a)});
-ANNOUNCEMENTS.forEach(a=>{const n=Date.now();if(n<new Date(a.start)||n>new Date(a.end).getTime()+864e5)return;const d=el('div','an'),x=el('button','','✕');
- if(safe(a.image)){const i=new Image();i.src=a.image;i.alt='';d.append(i)}x.setAttribute('aria-label','Dismiss');x.onclick=()=>d.remove();d.append(el('b','',a.title),el('span','',a.text),x);$('#an').append(d)});
+
+[
+  ['instagram', 'fa-brands fa-instagram', 'Instagram'],
+  ['facebook', 'fa-brands fa-facebook-f', 'Facebook'],
+  ['x', 'fa-brands fa-x-twitter', 'X'],
+  ['telegram', 'fa-brands fa-telegram', 'Telegram']
+].forEach(([k, icon, name]) => {
+
+  const a = el('a', 'card glass soc');
+
+  a.href = safe(CONFIG.socials[k])
+    ? CONFIG.socials[k]
+    : '#';
+
+  a.target = '_blank';
+  a.rel = 'noopener noreferrer';
+
+  const iconElement = el('i', icon);
+
+  iconElement.setAttribute(
+    'aria-hidden',
+    'true'
+  );
+
+  a.append(
+    iconElement,
+    el('b', '', name)
+  );
+
+  $('#soc').append(a);
+});
+
+
+ANNOUNCEMENTS.forEach(a => {
+
+  const n = Date.now();
+
+  if (
+    n < new Date(a.start) ||
+    n > new Date(a.end).getTime() + 864e5
+  ) return;
+
+  const d = el('div', 'an');
+
+  const x = el(
+    'button',
+    '',
+    '✕'
+  );
+
+  if (safe(a.image)) {
+
+    const i = new Image();
+
+    i.src = a.image;
+    i.alt = '';
+
+    d.append(i);
+  }
+
+  x.setAttribute(
+    'aria-label',
+    'Dismiss'
+  );
+
+  x.onclick = () => d.remove();
+
+  d.append(
+    el('b', '', a.title),
+    el('span', '', a.text),
+    x
+  );
+
+  $('#an').append(d);
+});
 
 /* ---- fun: ticker, years timeline, clickable 3D icons ---- */
 (function(){const b=el('div','tkin');for(let k=0;k<2;k++)PP('ticker').forEach(a=>{const s=el('span');s.append(ic(a[0]),document.createTextNode(a[1]||''));b.append(s)});$('#tk').append(b);
