@@ -3,7 +3,7 @@
    Icons: use a 3D icon name from assets/icons (without .png), e.g. graduation_cap, stethoscope, hot_beverage,
    or type any normal emoji. Full guide: README.md */
 window.SITE = {
-  name: "CLASS OF 2026",
+  name: "طب الأزهر دمياط",
   logo: "assets/logo.png",                              // e.g. assets/logo.png  (empty = "YOUR LOGO" placeholder)
   date: "2026-12-19T13:00:00",           // graduation date & time
   since: "2021-10-10",                   // "days since" counter
