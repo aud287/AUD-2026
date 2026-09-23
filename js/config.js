@@ -56,6 +56,16 @@ PRIMARY CAFFEINE SOURCE? | Coffee | Energy Drinks | Tea | Pure Willpower`,
 
   cats: `FIRST DAY, SENIOR JACKET, GRADUATION JACKET, OSCE, EVENTS, LECTURES, HOSPITAL, CLINICAL YEARS, FRIENDS, TRIPS, PARTIES, FUNNY MOMENTS, GRADUATION`,
 
+  /* exam roadmap: icon | Subject name | YYYY-MM-DD  — each gets an automatic ✓ once its exam
+     day passes 2:00 PM. Icons here are the flat/grainy set in assets/icons (heart_pulse,
+     family_group, book_open, scalpel, anesthesia_mask, bone_joint). */
+  exams: `heart_pulse | Internal Medicine | 2026-10-24
+family_group | Family Medicine | 2026-11-07
+book_open | Elective | 2026-11-21
+scalpel | Surgery | 2026-11-28
+anesthesia_mask | Anesthesia | 2026-12-05
+bone_joint | Orthopedics | 2026-12-19`,
+
   /* your own photos for the board: file | title | CATEGORY | date   (put files in assets/photos/) */
   photos: ``
   /* example:  assets/photos/01.jpg | Day one | FIRST DAY | 2021-10-10 */

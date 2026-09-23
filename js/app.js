@@ -45,11 +45,11 @@ const fmt=d=>d?new Date(d).toLocaleDateString('en-GB',{day:'numeric',month:'shor
 const ic=(v,c)=>{v=String(v||'');if(/^[a-z0-9_-]+$/.test(v)){const i=new Image();i.src='assets/icons/'+v+'.png';i.alt='';i.decoding='async';i.className='i3 '+(c||'');return i}return el('span',c||'',v)};
 const RM=matchMedia('(prefers-reduced-motion:reduce)').matches,GT=new Date(CONFIG.graduationDate).getTime(),gd=new Date(GT);
 document.documentElement.classList.add('js');
-function toast(t){const x=$('#toast');x.textContent=t;x.classList.add('on');clearTimeout(x._t);x._t=setTimeout(()=>x.classList.remove('on'),3200)}
+function toast(t,ms){const x=$('#toast');x.textContent=t;x.classList.add('on');clearTimeout(x._t);x._t=setTimeout(()=>x.classList.remove('on'),ms||3200)}
 $$('.cn').forEach(e=>e.textContent=CONFIG.className);
 $$('.gd').forEach(e=>e.textContent=gd.toLocaleDateString('en-GB',{day:'numeric',month:'long',year:'numeric'}).toUpperCase());
 $$('.gs').forEach(e=>e.textContent=gd.toLocaleDateString('en-GB').replace(/\//g,'.'));
-$$('.class-logo').forEach(d=>{if(ok(CONFIG.logo)){const i=new Image();i.src=CONFIG.logo;i.alt='Class logo';d.append(i)}else d.textContent='YOUR LOGO'});
+$$('.class-logo').forEach(d=>{if(ok(CONFIG.logo)){const i=new Image();i.src=CONFIG.logo;i.alt='Class logo';d.append(i)}else{d.textContent='YOUR LOGO';d.classList.add('placeholder')}});
 
 /* ---- audio + cinematic intro (runs on EVERY load; music starts automatically, or on the first tap if the browser blocks it) ---- */
 const bg=new Audio();bg.loop=true;bg.volume=.55;const HM=ok(CONFIG.backgroundMusic);if(HM)bg.src=CONFIG.backgroundMusic;
@@ -75,6 +75,18 @@ function tick(){const ms=GT-Date.now(),t=Math.max(0,Math.floor(ms/1e3));
  [['d',Math.floor(t/86400)],['h',Math.floor(t/3600)%24],['m',Math.floor(t/60)%60],['s',t%60]].forEach(([k,v])=>$('#'+k).textContent=k=='d'?v:String(v).padStart(2,'0'));
  if(ms<=0&&!grad){grad=1;document.body.classList.add('grad');$('#ht').textContent='WE DID IT.';$('#hs').textContent=gd.toLocaleDateString('en-GB').replace(/\//g,'.')+' · THE CHAPTER IS COMPLETE.'}}
 tick();setInterval(tick,1000);
+/* ---- exam roadmap: horizontal path of stops, auto-checked once each exam day passes 2:00 PM ---- */
+function examRoad(){const wrap=$('#stops');if(!wrap)return;
+ const EX=PP('exams').filter(a=>a.length>2).map(a=>({icon:a[0],name:a[1],date:a[2]}));
+ const now=Date.now();wrap.replaceChildren();let nextSet=0;
+ EX.forEach(x=>{const end=new Date(x.date+'T14:00:00').getTime(),done=now>=end,isNext=!done&&!nextSet&&(nextSet=1);
+  const s=el('div','stop'+(done?' done':isNext?' next':'')),b=el('div','badge');
+  b.append(ic(x.icon));if(done)b.append(el('span','chk','✓'));
+  s.append(b,el('b','',x.name),el('small','',fmt(x.date)));wrap.append(s)});
+ const gdone=now>=GT,gs=el('div','stop grad'+(gdone?' done':'')),gb=el('div','badge');
+ gb.append(ic('grad_cap_flat'));if(gdone)gb.append(el('span','chk','✓'));
+ gs.append(gb,el('b','','Graduation'),el('small','',fmt(CONFIG.graduationDate)));wrap.append(gs)}
+examRoad();setInterval(examRoad,60000);
 /* ---- milestones: every 10 days 100→40, then every day 30→0; once per device ---- */
 function mile(){const d=Math.max(0,Math.ceil((GT-Date.now())/864e5));
  if(!(d<=30||(d<=100&&d%10==0)))return;
@@ -119,23 +131,34 @@ function chipsR(){const c=$('#chips'),p=$('#pc');c.replaceChildren();p.replaceCh
 let rt;addEventListener('resize',()=>{clearTimeout(rt);rt=setTimeout(strings,200)});addEventListener('load',strings);
 /* flip-through photo gallery: used both by "show more" and by clicking any single photo */
 let GAL=[],GI=0;
+function buildStrip(){const s=$('#lbstrip');s.replaceChildren();
+ GAL.forEach((m,i)=>{const b=el('button');b.type='button';b.setAttribute('aria-label','Go to photo '+(i+1));
+  b.append(m.ev?ic(m.e||'📌','em'):pic(m,i));b.onclick=()=>{GI=i;fillLB()};s.append(b)})}
+function markStrip(){$$('#lbstrip button').forEach((b,i)=>{const on=i===GI;b.classList.toggle('on',on);if(on)b.scrollIntoView({behavior:'smooth',inline:'center',block:'nearest'})})}
 function fillLB(){const m=GAL[GI],b=$('#lbc'),p=el('div','ph big');b.replaceChildren();p.append(m.ev?ic(m.e||'📌','em'):pic(m,GI,1));
- b.append(p,el('h3','',m.title),el('p','',m.cap||''),el('small','',[m.cat,fmt(m.date)].filter(Boolean).join(' · ')));$('#lbidx').textContent=(GI+1)+' / '+GAL.length}
-function openLB(L,i){if(!L.length)return;GAL=L;GI=((i%L.length)+L.length)%L.length;fillLB();if(!$('#lb').open)$('#lb').showModal()}
+ b.append(p,el('h3','',m.title),el('p','',m.cap||''),el('small','',[m.cat,fmt(m.date)].filter(Boolean).join(' · ')));$('#lbidx').textContent=(GI+1)+' / '+GAL.length;markStrip()}
+function openLB(L,i){if(!L.length)return;GAL=L;GI=((i%L.length)+L.length)%L.length;buildStrip();fillLB();if(!$('#lb').open)$('#lb').showModal()}
 $('#lbp').onclick=()=>{GI=(GI-1+GAL.length)%GAL.length;fillLB()};$('#lbn').onclick=()=>{GI=(GI+1)%GAL.length;fillLB()};
 $('#lb').onclick=e=>{if(e.target===e.currentTarget)e.currentTarget.close()};
 $('#mr').onclick=e=>{if(e.target===e.currentTarget)e.currentTarget.close()};
 $$('.cl,.x').forEach(b=>b.onclick=()=>b.closest('dialog').close());
+/* swipe left/right on the enlarged photo or message to move to the next/previous one */
+function swipeNav(sel,prevSel,nextSel){const t=$(sel);if(!t)return;let sx=0,sy=0,on=0;
+ t.addEventListener('touchstart',e=>{const p=e.touches[0];sx=p.clientX;sy=p.clientY;on=1},{passive:true});
+ t.addEventListener('touchend',e=>{if(!on)return;on=0;const p=e.changedTouches[0],dx=p.clientX-sx,dy=p.clientY-sy;
+  if(Math.abs(dx)>40&&Math.abs(dx)>Math.abs(dy))$(dx<0?nextSel:prevSel).click()},{passive:true})}
+swipeNav('#lbc','#lbp','#lbn');swipeNav('#mrc','#mrp','#mrn');
 addEventListener('keydown',e=>{if(e.key!=='ArrowLeft'&&e.key!=='ArrowRight')return;
  if($('#lb').open)$('#'+(e.key=='ArrowLeft'?'lbp':'lbn')).click();else if($('#mr').open)$('#'+(e.key=='ArrowLeft'?'mrp':'mrn')).click()});
 $('#add').onclick=()=>$('#am').showModal();
 $('#af').onsubmit=async e=>{e.preventDefault();const f=$('#pf').files[0];if(!f||!/^image\//.test(f.type))return toast('Choose an image.');
- const btn=$('#af button:not(.x)');btn.disabled=true;
+ const btn=$('#afbtn'),spin=$('#afspin'),btxt=$('#afbtxt');btn.disabled=true;spin.hidden=false;btxt.textContent='UPLOADING…';
  try{const img=await shrink(f),nm=clean($('#pn').value,30),cp=clean($('#pp').value,140),r=await api({action:'photo',name:nm,category:$('#pc').value,caption:cp,image:img});
   if(!r.ok&&!r.demo)throw 0;
   MEM.unshift(r.item?vp(r.item):{cat:$('#pc').value,title:cp||'Memory',cap:'By '+nm,date:new Date().toISOString(),thumb:img,url:img});
-  cat='ALL';$$('.chip').forEach((x,i)=>x.classList.toggle('on',!i));board();$('#am').close();e.target.reset();toast(r.demo?'Added (demo: connect the Backend link to keep it).':'Your memory is live!')}catch(x){toast('Could not send. Try again.')}
- btn.disabled=false};
+  cat='ALL';$$('.chip').forEach((x,i)=>x.classList.toggle('on',!i));board();$('#am').close();e.target.reset();
+  toast(r.demo?'Added (demo: connect the Backend link to keep it).':'✅ تم رفع الصورة بنجاح',10000)}catch(x){toast('Could not send. Try again.')}
+ finally{btn.disabled=false;spin.hidden=true;btxt.textContent='SUBMIT MEMORY'}};
 
 /* ---- by the numbers: days since the start date (live) + infinity stats from the Layout gadget ---- */
 const SINCE=new Date(G('since')||'2021-10-10').getTime();

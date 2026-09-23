@@ -28,7 +28,7 @@
 <button class="lnk" id="skip">SKIP</button></div></div>
 <div id="ov" role="alertdialog" aria-live="polite"><div><img class="cap2" src="assets/icons/graduation_cap.png" alt=""><h2 id="ot"></h2><p id="op"></p></div></div>
 <header><b class="cn"></b>
-<nav id="nv" aria-label="Main"><a href="#home">HOME</a><a href="#countdown">COUNTDOWN</a><a href="#memories">MEMORIES</a><a href="#messages">MESSAGES</a><a href="#events">EVENTS</a></nav>
+<nav id="nv" aria-label="Main"><a href="#home">HOME</a><a href="#countdown">COUNTDOWN</a><a href="#memories">MEMORIES</a><a href="#examroad">EXAMS</a><a href="#messages">MESSAGES</a><a href="#events">EVENTS</a></nav>
 <button class="ib" id="sb" aria-label="Toggle sound" aria-pressed="false">🔇</button><button class="ib" id="sh" aria-label="Share">↗</button><button class="ib" id="mb" aria-label="Menu" aria-expanded="false">☰</button></header>
 <div id="an"></div>
 
@@ -50,6 +50,9 @@
 <div class="board" id="board"><svg id="str" aria-hidden="true"></svg><div class="grid" id="grid"></div></div>
 <div class="row"><span id="cnt" class="cnt"></span><button class="btn" id="more">SHOW MORE MEMORIES</button><button class="btn g" id="add">+ ADD YOUR MEMORY</button></div></section>
 
+<section id="examroad" class="rv"><h2>IN SEARCH OF GRADUATION</h2><p class="sub">Six stops on the map, then the cap goes up. Each one checks itself off once the exam ends.</p>
+<div class="examroad"><div class="stops" id="stops"></div></div></section>
+
 <section id="years" class="rv"><h2>OUR YEARS</h2><p class="sub">Five years, five plot twists.</p><div class="tl" id="tl"></div></section>
 
 <section id="stats" class="rv"><h2>BY THE NUMBERS</h2><p class="sub">Medical school, counted. Some things can't be counted.</p>
@@ -68,11 +71,15 @@
 <section id="connect" class="rv"><h2>FOLLOW THE FINAL CHAPTER</h2><p class="sub">Stay connected.</p><div class="socs" id="soc"></div></section>
 <footer><h2 class="cn"></h2><p class="gd gs"></p><p class="q">“The chapter ends.<br/>The memories don't.”</p><a class="btn g" href="#home">BACK TO TOP ↑</a></footer>
 
-<dialog id="lb"><button class="navb prevb" id="lbp" aria-label="Previous photo">‹</button><button class="navb nextb" id="lbn" aria-label="Next photo">›</button><div class="dlg"><button class="ib cl" aria-label="Close">✕</button><div id="lbc"></div><small class="idx" id="lbidx"></small></div></dialog>
-<dialog id="mr"><button class="navb prevb" id="mrp" aria-label="Previous message">‹</button><button class="navb nextb" id="mrn" aria-label="Next message">›</button><div class="dlg"><button class="ib cl" aria-label="Close">✕</button><div id="mrc"></div><small class="idx" id="mridx"></small></div></dialog>
+<dialog id="lb" class="gallery"><div class="dlg"><button class="ib cl" aria-label="Close">✕</button>
+<div class="lbmain"><button class="navb prevb" id="lbp" aria-label="Previous photo">‹</button><div id="lbc"></div><button class="navb nextb" id="lbn" aria-label="Next photo">›</button></div>
+<small class="idx" id="lbidx"></small><div class="strip" id="lbstrip" role="group" aria-label="All photos"></div></div></dialog>
+<dialog id="mr" class="gallery msgdlg"><div class="dlg"><button class="ib cl" aria-label="Close">✕</button>
+<div class="lbmain"><button class="navb prevb" id="mrp" aria-label="Previous message">‹</button><div id="mrc"></div><button class="navb nextb" id="mrn" aria-label="Next message">›</button></div>
+<small class="idx" id="mridx"></small></div></dialog>
 <dialog id="am"><form id="af" class="dlg"><h3>Add your memory</h3><p class="sub">Photos are reviewed before they appear.</p>
 <input type="file" id="pf" accept="image/*" aria-label="Photo" required="required"/><input id="pn" maxlength="30" placeholder="Your name" aria-label="Your name" required="required"/><select id="pc" aria-label="Category"></select><textarea id="pp" maxlength="140" rows="2" placeholder="Caption" aria-label="Caption"></textarea>
-<button class="btn">SUBMIT MEMORY</button> <button type="button" class="btn g x">CANCEL</button></form></dialog>
+<button class="btn" id="afbtn" type="submit"><span class="spin" id="afspin" hidden></span><span id="afbtxt">SUBMIT MEMORY</span></button> <button type="button" class="btn g x">CANCEL</button></form></dialog>
 <script src="js/config.js"></script>
 <script src="js/app.js"></script>
 </body>
