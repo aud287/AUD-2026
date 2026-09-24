@@ -9,7 +9,7 @@ window.SITE = {
   date: "2026-12-19T13:00:00",           // graduation date & time
   since: "2021-10-10",                   // "days since" counter
   music: "assets/audio/music.mp3",       // put your mp3 here (plays with the intro)
-  gradsound: "",                         // graduation-day sound, e.g. assets/audio/grad.mp3
+  gradsound: "assets/audio/grad.mp3",                         // graduation-day sound, e.g. assets/audio/grad.mp3
   milestones: ``,                        // countdown sounds, one per line: 50=assets/audio/50days.mp3
   backend: "https://script.google.com/macros/s/AKfycbxYJoeSWfvarj8VhskJCy0itEOVrqHbJgcDn2LxSX38wVPdDnpCHOTK6XNGAYOkfafk/exec",                           // Google Apps Script Web app URL (see README.md)
 
