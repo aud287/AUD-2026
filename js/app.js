@@ -4,7 +4,7 @@ const LN=k=>G(k).split(/\n+/).map(x=>x.trim()).filter(Boolean);
 const KV=k=>{const o={};LN(k).forEach(x=>{const i=x.indexOf('=');if(i>0)o[x.slice(0,i).trim().toLowerCase()]=x.slice(i+1).trim()});return o};
 const PP=k=>LN(k).map(x=>x.split('|').map(t=>t.trim()));
 const DR=(u,img)=>{const m=/drive\.google\.com.*?(?:\/d\/|[?&]id=)([\w-]+)/.exec(u||'');return m?(img?'https://lh3.googleusercontent.com/d/'+m[1]+'=w800':'https://drive.google.com/uc?export=download&id='+m[1]):u};
-const CONFIG={className:G('name')||"CLASS OF 2026",graduationDate:G('date')||"2026-12-19T13:00:00",logo:DR(G('logo'),1),backgroundMusic:DR(G('music')),graduationSound:DR(G('gradsound')),socials:KV('social')};
+const CONFIG={className:G('name')||"CLASS OF 2026",graduationDate:G('date')||"2026-12-19T13:00:00",logo:DR(G('logo'),1),frame:DR(G('frame'),1),backgroundMusic:DR(G('music')),graduationSound:DR(G('gradsound')),socials:KV('social')};
 const BU=G('backend'),BACKEND={enabled:/^https:\/\/script\.google\.com\//i.test(BU),apiUrl:BU};
 const MS=KV('milestones'),COUNTDOWN_MILESTONES={};Object.keys(MS).forEach(k=>COUNTDOWN_MILESTONES[+k]={sound:DR(MS[k])});
 const EVENTS=PP('events').filter(a=>a.length>2).map(a=>({e:a[0],t:a[1],d:a[2].replace(' ','T'),l:a[3]||'',x:a[4]||''}));
@@ -42,7 +42,7 @@ const el=(t,c,x)=>{const e=document.createElement(t);if(c)e.className=c;if(x!=nu
 const ok=u=>!!u&&!/^YOUR_/i.test(u),safe=u=>/^(https?:\/\/|data:image\/|\.{0,2}\/|assets\/)/i.test(u||"");
 const clean=(s,n)=>String(s||"").replace(/[<>]/g,"").replace(/javascript:/gi,"").trim().slice(0,n);
 const fmt=d=>d?new Date(d).toLocaleDateString('en-GB',{day:'numeric',month:'short',year:'numeric'}):"";
-const ic=(v,c)=>{v=String(v||'');if(/^[a-z0-9_-]+$/.test(v)){const i=new Image();i.src='assets/icons/'+v+'.png';i.alt='';i.decoding='async';i.className='i3 '+(c||'');return i}return el('span',c||'',v)};
+const ic=(v,c)=>{v=String(v||'');if(/^[a-z0-9_-]+$/.test(v)){const i=new Image();i.src='assets/icons/'+v+'.png';i.alt='';i.loading='lazy';i.decoding='async';i.className='i3 '+(c||'');return i}return el('span',c||'',v)};
 const RM=matchMedia('(prefers-reduced-motion:reduce)').matches,GT=new Date(CONFIG.graduationDate).getTime(),gd=new Date(GT);
 document.documentElement.classList.add('js');
 function toast(t,ms){const x=$('#toast');x.textContent=t;x.classList.add('on');clearTimeout(x._t);x._t=setTimeout(()=>x.classList.remove('on'),ms||3200)}
@@ -56,9 +56,9 @@ const bg=new Audio();bg.loop=true;bg.volume=.55;const HM=ok(CONFIG.backgroundMus
 const LINES=G('intro').split(/\n+/).map(x=>x.trim()).filter(Boolean);
 let started=0,gone=0;
 function snd(v){$('#sb').textContent=v?'🔊':'🔇';$('#sb').setAttribute('aria-pressed',v?'true':'false');if(v)bg.play().catch(()=>snd(0));else bg.pause()}
-function enter(){if(gone)return;gone=1;const i=$('#intro');i.classList.add('out');document.body.classList.remove('lock');setTimeout(()=>{i.remove();mile()},900)}
+function enter(){if(gone)return;gone=1;const i=$('#intro');i.classList.add('out');document.body.classList.remove('lock');setTimeout(()=>{i.remove();mile()},450)}
 function begin(){if(started)return;started=1;let i=0;const box=$('#il');
- (function next(){if(gone)return;if(i>=LINES.length){setTimeout(enter,600);return}const last=i==LINES.length-1;box.replaceChildren(el('div','il-line'+(last?' last':''),LINES[i++]));setTimeout(next,last?3000:1900)})()}
+ (function next(){if(gone)return;if(i>=LINES.length){setTimeout(enter,300);return}const last=i==LINES.length-1;box.replaceChildren(el('div','il-line'+(last?' last':''),LINES[i++]));setTimeout(next,last?1500:950)})()}
 $('#skip').onclick=enter;$('#sb').onclick=()=>snd(bg.paused);
 if(HM)bg.play().then(()=>snd(1)).catch(()=>{});
 begin();
@@ -109,7 +109,7 @@ let MEM=MEMORIES,cat='ALL',sortDir='new';const BOARD_N=12;
 const byDate=(a,b)=>{const A=String(a.date||''),B=String(b.date||'');return sortDir=='new'?(A<B?1:A>B?-1:0):(A<B?-1:A>B?1:0)};
 const list=()=>MEM.filter(m=>cat=='ALL'||(m.cat||'').toUpperCase()==cat).slice().sort(byDate);
 function pic(m,i,big){const u=big?m.url:(m.thumb||m.url);
- if(safe(u)){const g=new Image();g.src=u;g.alt=m.title||'Memory photo';g.loading='lazy';g.decoding='async';return g}
+ if(safe(u)){const g=new Image();g.src=u;g.alt=m.title||'Memory photo';if(!big)g.loading='lazy';g.decoding='async';return g}
  const s=el('span','em',m.e||'📷'),h=(i*47)%360;s.style.background='linear-gradient(135deg,hsl('+h+' 70% 84%),hsl('+(h+40)%360+' 65% 72%))';return s}
 function slot(m,i,L){const s=el('div','slot'),b=el('button',m.ev?'note':'pol');b.type='button';
  b.style.setProperty('--r',(((i*53)%9)-4)*.9+'deg');s.style.animationDelay=(i%BOARD_N)*.09+'s';
@@ -135,8 +135,11 @@ function buildStrip(){const s=$('#lbstrip');s.replaceChildren();
  GAL.forEach((m,i)=>{const b=el('button');b.type='button';b.setAttribute('aria-label','Go to photo '+(i+1));
   b.append(m.ev?ic(m.e||'📌','em'):pic(m,i));b.onclick=()=>{GI=i;fillLB()};s.append(b)})}
 function markStrip(){$$('#lbstrip button').forEach((b,i)=>{const on=i===GI;b.classList.toggle('on',on);if(on)b.scrollIntoView({behavior:'smooth',inline:'center',block:'nearest'})})}
-function fillLB(){const m=GAL[GI],b=$('#lbc'),p=el('div','ph big');b.replaceChildren();p.append(m.ev?ic(m.e||'📌','em'):pic(m,GI,1));
- b.append(p,el('h3','',m.title),el('p','',m.cap||''),el('small','',[m.cat,fmt(m.date)].filter(Boolean).join(' · ')));$('#lbidx').textContent=(GI+1)+' / '+GAL.length;markStrip()}
+function fillLB(){const m=GAL[GI],b=$('#lbc'),p=el('div','ph big');b.replaceChildren();
+ const media=m.ev?ic(m.e||'📌','em'):pic(m,GI,1);media.classList.add('fade-in');p.append(media);
+ requestAnimationFrame(()=>requestAnimationFrame(()=>media.classList.add('show')));
+ b.append(p,el('h3','',m.title),el('p','',m.cap||''),el('small','',[m.cat,fmt(m.date)].filter(Boolean).join(' · ')));$('#lbidx').textContent=(GI+1)+' / '+GAL.length;markStrip();preloadNeighbors()}
+function preloadNeighbors(){[1,-1].forEach(d=>{const n=GAL[(GI+d+GAL.length)%GAL.length],u=n&&!n.ev&&(n.url||n.thumb);if(safe(u))new Image().src=u})}
 function openLB(L,i){if(!L.length)return;GAL=L;GI=((i%L.length)+L.length)%L.length;buildStrip();fillLB();if(!$('#lb').open)$('#lb').showModal()}
 $('#lbp').onclick=()=>{GI=(GI-1+GAL.length)%GAL.length;fillLB()};$('#lbn').onclick=()=>{GI=(GI+1)%GAL.length;fillLB()};
 $('#lb').onclick=e=>{if(e.target===e.currentTarget)e.currentTarget.close()};
@@ -159,6 +162,59 @@ $('#af').onsubmit=async e=>{e.preventDefault();const f=$('#pf').files[0];if(!f||
   cat='ALL';$$('.chip').forEach((x,i)=>x.classList.toggle('on',!i));board();$('#am').close();e.target.reset();
   toast(r.demo?'Added (demo: connect the Backend link to keep it).':'✅ تم رفع الصورة بنجاح',10000)}catch(x){toast('Could not send. Try again.')}
  finally{btn.disabled=false;spin.hidden=true;btxt.textContent='SUBMIT MEMORY'}};
+
+/* ---- frame tool: drag/pinch your photo to fit under the class frame, download as one PNG ---- */
+(function(){
+ const stage=$('#frameStage'),canvas=$('#frameCanvas');if(!stage||!canvas)return;
+ const hint=$('#frameHint'),fileInp=$('#frameFile'),zoomRow=$('#zoomRow'),zoomSlider=$('#frameZoom'),dlBtn=$('#frameDownload');
+ const ctx=canvas.getContext('2d'),S=canvas.width;
+ const frameImg=new Image();frameImg.crossOrigin='anonymous';let frameReady=false;
+ if(ok(CONFIG.frame)){frameImg.onload=()=>{frameReady=true;draw()};
+  if('IntersectionObserver' in window){const io=new IntersectionObserver(es=>{if(es[0].isIntersecting){frameImg.src=CONFIG.frame;io.disconnect()}},{rootMargin:'600px'});io.observe(stage)}
+  else frameImg.src=CONFIG.frame}
+ let img=null,baseScale=1,zoom=1,offX=0,offY=0,drag=null,pinchDist=0,pinchZoom=1,pinchAt=[0,0];
+ const pointers=new Map();
+ function clampOff(){const dw=img.width*baseScale*zoom,dh=img.height*baseScale*zoom;
+  offX=Math.min(0,Math.max(S-dw,offX));offY=Math.min(0,Math.max(S-dh,offY))}
+ function draw(){ctx.clearRect(0,0,S,S);
+  if(img){const dw=img.width*baseScale*zoom,dh=img.height*baseScale*zoom;ctx.drawImage(img,offX,offY,dw,dh)}
+  else{ctx.fillStyle='#f4e6d2';ctx.fillRect(0,0,S,S)}
+  if(frameReady)ctx.drawImage(frameImg,0,0,S,S)}
+ function loadPhoto(file){if(!file||!/^image\//.test(file.type))return;
+  const url=URL.createObjectURL(file),i=new Image();
+  i.onload=()=>{img=i;baseScale=Math.max(S/i.width,S/i.height);zoom=1;
+   offX=(S-i.width*baseScale)/2;offY=(S-i.height*baseScale)/2;
+   hint.hidden=true;zoomRow.hidden=false;dlBtn.hidden=false;zoomSlider.value=1;
+   URL.revokeObjectURL(url);draw()};
+  i.src=url}
+ fileInp.onchange=()=>loadPhoto(fileInp.files[0]);
+ zoomSlider.oninput=()=>{if(!img)return;setZoom(+zoomSlider.value,S/2,S/2)};
+ function setZoom(nz,cx,cy){nz=Math.min(3,Math.max(1,nz));const oldScale=baseScale*zoom,
+  ix=(cx-offX)/oldScale,iy=(cy-offY)/oldScale,newScale=baseScale*nz;
+  offX=cx-ix*newScale;offY=cy-iy*newScale;zoom=nz;clampOff();draw()}
+ function toCanvasXY(clientX,clientY){const r=canvas.getBoundingClientRect();
+  return[(clientX-r.left)*(S/r.width),(clientY-r.top)*(S/r.height)]}
+ stage.addEventListener('pointerdown',e=>{if(!img)return;stage.setPointerCapture(e.pointerId);
+  pointers.set(e.pointerId,[e.clientX,e.clientY]);
+  if(pointers.size===1){const[x,y]=toCanvasXY(e.clientX,e.clientY);drag={x,y,offX,offY}}
+  else if(pointers.size===2){drag=null;const pts=[...pointers.values()];
+   pinchDist=Math.hypot(pts[0][0]-pts[1][0],pts[0][1]-pts[1][1]);pinchZoom=zoom;
+   const mx=(pts[0][0]+pts[1][0])/2,my=(pts[0][1]+pts[1][1])/2;pinchAt=toCanvasXY(mx,my)}});
+ stage.addEventListener('pointermove',e=>{if(!pointers.has(e.pointerId))return;
+  pointers.set(e.pointerId,[e.clientX,e.clientY]);
+  if(pointers.size===2){const pts=[...pointers.values()],
+   d=Math.hypot(pts[0][0]-pts[1][0],pts[0][1]-pts[1][1]),
+   mx=(pts[0][0]+pts[1][0])/2,my=(pts[0][1]+pts[1][1])/2;
+   zoomSlider.value=Math.min(3,Math.max(1,pinchZoom*(d/pinchDist)));
+   setZoom(+zoomSlider.value,pinchAt[0],pinchAt[1])}
+  else if(pointers.size===1&&drag){const[x,y]=toCanvasXY(e.clientX,e.clientY);
+   offX=drag.offX+(x-drag.x);offY=drag.offY+(y-drag.y);clampOff();draw()}});
+ function endPointer(e){pointers.delete(e.pointerId);if(pointers.size<2)pinchDist=0;if(pointers.size===0)drag=null}
+ ['pointerup','pointercancel','pointerleave'].forEach(ev=>stage.addEventListener(ev,endPointer));
+ dlBtn.onclick=()=>{if(!img)return;const a=el('a');a.href=canvas.toDataURL('image/png');
+  a.download=(CONFIG.className||'class').toLowerCase().replace(/[^a-z0-9]+/g,'-')+'-frame.png';a.click()};
+ draw();
+})();
 
 /* ---- by the numbers: days since the start date (live) + infinity stats from the Layout gadget ---- */
 const SINCE=new Date(G('since')||'2021-10-10').getTime();

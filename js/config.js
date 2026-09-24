@@ -5,6 +5,7 @@
 window.SITE = {
   name: "طب الأزهر دمياط",
   logo: "assets/logo.png",                              // e.g. assets/logo.png  (empty = "YOUR LOGO" placeholder)
+  frame: "assets/frame.png",             // square (1:1) PNG with a transparent middle — visitors upload a photo that sits behind it
   date: "2026-12-19T13:00:00",           // graduation date & time
   since: "2021-10-10",                   // "days since" counter
   music: "assets/audio/music.mp3",       // put your mp3 here (plays with the intro)

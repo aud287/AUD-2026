@@ -27,10 +27,10 @@ nav a:hover,nav a.on{background:var(--wine);color:var(--iv)}
 .st>*{animation:up .8s var(--e) both}
 .st>:nth-child(2){animation-delay:.15s}.st>:nth-child(3){animation-delay:.3s}.st>:nth-child(4){animation-delay:.45s}.st>:nth-child(5){animation-delay:.6s}.st>:nth-child(6){animation-delay:.75s}
 @keyframes up{from{opacity:0;transform:translateY(22px)}}
-#intro{position:fixed;inset:0;z-index:100;display:grid;place-items:center;text-align:center;padding:20px;background:radial-gradient(circle at 50% 28%,var(--iv),var(--pk) 58%,#b5506a);transition:opacity .8s,visibility .8s}
+#intro{position:fixed;inset:0;z-index:100;display:grid;place-items:center;text-align:center;padding:20px;background:radial-gradient(circle at 50% 28%,var(--iv),var(--pk) 58%,#b5506a);transition:opacity .4s,visibility .4s}
 #intro.out{opacity:0;visibility:hidden}
-.class-logo{width:160px;height:160px;margin:0 auto 16px;display:grid;place-items:center}
-.class-logo img{width:120%;height:100%;object-fit:contain;filter:drop-shadow(0 10px 18px #6b1a2e33)}
+.class-logo{width:112px;height:112px;margin:0 auto 16px;display:grid;place-items:center}
+.class-logo img{width:100%;height:100%;object-fit:contain;filter:drop-shadow(0 10px 18px #6b1a2e33)}
 .class-logo.placeholder{border-radius:50%;background:#fff9;border:2px dashed var(--bur);font:700 11px/1.3 'DM Sans',var(--ar);letter-spacing:.14em;color:var(--bur);overflow:hidden;box-shadow:0 10px 30px #6b1a2e33}
 .eyebrow{letter-spacing:.35em;font-weight:700;color:var(--bur);font-size:13px}
 .gd{letter-spacing:.3em;font-weight:700;font-size:14px;margin:6px 0}
@@ -127,6 +127,7 @@ dialog.gallery.msgdlg{width:min(92vw,520px)}
 .big{font-size:120px;border-radius:12px}
 .ph.big{aspect-ratio:auto;overflow:visible;max-height:56vh;display:flex;justify-content:center;background:none}
 .ph.big>*{width:auto;height:auto;max-width:100%;max-height:56vh;object-fit:contain;border-radius:14px;box-shadow:0 20px 46px #0004}
+.fade-in{opacity:0;transition:opacity .25s var(--e)}.fade-in.show{opacity:1}
 .strip{display:flex;gap:8px;overflow-x:auto;padding:14px 2px 2px;margin-top:8px;scroll-snap-type:x proximity;-webkit-overflow-scrolling:touch}
 .strip button{flex:0 0 auto;width:56px;height:56px;border-radius:10px;overflow:hidden;border:2px solid transparent;opacity:.5;transition:.25s var(--e);scroll-snap-align:center;padding:0;background:#0000}
 .strip button img,.strip button span{width:100%;height:100%;object-fit:cover;display:block}
@@ -144,7 +145,16 @@ dialog.gallery.msgdlg{width:min(92vw,520px)}
 .nb{display:block;font:900 clamp(48px,9vw,72px)/1.1 'Playfair Display',Georgia,serif;background:linear-gradient(135deg,var(--bur),var(--gold));-webkit-background-clip:text;background-clip:text;color:transparent}
 @media(prefers-reduced-motion:reduce){*,*:before,*:after{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
 
-/* ===== upload spinner ===== */
+/* ===== frame your photo ===== */
+.framewrap{display:flex;flex-direction:column;align-items:center;gap:18px}
+.frameStage{position:relative;width:min(78vw,380px);aspect-ratio:1;border-radius:18px;overflow:hidden;background:var(--cr);box-shadow:0 18px 40px #6b1a2e33;touch-action:none;cursor:grab;user-select:none}
+.frameStage:active{cursor:grabbing}
+.frameStage canvas{width:100%;height:100%;display:block}
+.frameHint{position:absolute;inset:0;display:grid;place-items:center;text-align:center;padding:20px;font-weight:700;letter-spacing:.04em;color:var(--bur);background:#f4e6d288;pointer-events:none}
+.frameControls{display:flex;flex-direction:column;align-items:center;gap:12px;width:min(78vw,380px)}
+.zoomRow{display:flex;align-items:center;gap:10px;width:100%;font-size:18px;color:var(--bur)}
+.zoomRow input[type=range]{flex:1;accent-color:var(--bur)}
+.fnote{font-size:12px;opacity:.6;text-align:center;margin:0}
 .spin{display:inline-block;width:14px;height:14px;border:2px solid #ffffff55;border-top-color:#fff;border-radius:50%;margin-right:8px;vertical-align:-2px;animation:spin .8s linear infinite}
 @keyframes spin{to{transform:rotate(360deg)}}
 button:disabled{opacity:.75;cursor:wait}
@@ -179,7 +189,7 @@ section>h2:after{content:"";display:block;width:110px;height:10px;margin-top:10p
 .fl{position:absolute;width:clamp(56px,11vw,130px);transform:rotate(var(--r));animation:bob 5s ease-in-out infinite;filter:drop-shadow(0 16px 14px #0005)}
 .istage{position:relative;z-index:2;display:grid;justify-items:center;gap:22px;max-width:92vw}
 .il{min-height:2.4em;display:grid;place-items:center;font:900 clamp(30px,8.5vw,88px)/1.05 'Playfair Display',var(--ar),Georgia,serif;color:var(--wine);text-shadow:0 3px 0 #fff8}
-.il-line{animation:linein 1.8s var(--e) both}.il-line.last{animation:linelast 1.3s var(--e) both;color:var(--bur)}
+.il-line{animation:linein .95s var(--e) both}.il-line.last{animation:linelast .7s var(--e) both;color:var(--bur)}
 @keyframes linein{0%{opacity:0;transform:translateY(26px) scale(.94);filter:blur(8px)}20%,78%{opacity:1;transform:none;filter:none}100%{opacity:0;transform:translateY(-18px) scale(1.04);filter:blur(4px)}}
 @keyframes linelast{0%{opacity:0;transform:scale(.88)}100%{opacity:1;transform:none}}
 img.cap2{width:120px;height:auto;font-size:0}

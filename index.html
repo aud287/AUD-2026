@@ -28,7 +28,7 @@
 <button class="lnk" id="skip">SKIP</button></div></div>
 <div id="ov" role="alertdialog" aria-live="polite"><div><img class="cap2" src="assets/icons/graduation_cap.png" alt=""><h2 id="ot"></h2><p id="op"></p></div></div>
 <header><b class="cn"></b>
-<nav id="nv" aria-label="Main"><a href="#home">HOME</a><a href="#countdown">COUNTDOWN</a><a href="#memories">MEMORIES</a><a href="#examroad">EXAMS</a><a href="#messages">MESSAGES</a><a href="#events">EVENTS</a></nav>
+<nav id="nv" aria-label="Main"><a href="#home">HOME</a><a href="#countdown">COUNTDOWN</a><a href="#memories">MEMORIES</a><a href="#frame">FRAME</a><a href="#examroad">EXAMS</a><a href="#messages">MESSAGES</a><a href="#events">EVENTS</a></nav>
 <button class="ib" id="sb" aria-label="Toggle sound" aria-pressed="false">🔇</button><button class="ib" id="sh" aria-label="Share">↗</button><button class="ib" id="mb" aria-label="Menu" aria-expanded="false">☰</button></header>
 <div id="an"></div>
 
@@ -49,6 +49,17 @@
 <div class="chips-wrap"><div class="chips" id="chips" role="group" aria-label="Categories"></div><select id="psort" class="sortsel" aria-label="Sort memories"><option value="new">Newest first</option><option value="old">Oldest first</option></select></div>
 <div class="board" id="board"><svg id="str" aria-hidden="true"></svg><div class="grid" id="grid"></div></div>
 <div class="row"><span id="cnt" class="cnt"></span><button class="btn" id="more">SHOW MORE MEMORIES</button><button class="btn g" id="add">+ ADD YOUR MEMORY</button></div></section>
+
+<section id="frame" class="rv"><h2>FRAME YOUR PHOTO</h2><p class="sub">Upload your photo, drag to fit the square, and download your own framed picture.</p>
+<div class="framewrap">
+<div class="frameStage" id="frameStage"><canvas id="frameCanvas" width="1600" height="1600"></canvas><div class="frameHint" id="frameHint">Tap to add your photo</div></div>
+<div class="frameControls">
+<label class="btn" for="frameFile" id="frameChoose">CHOOSE YOUR PHOTO</label><input type="file" id="frameFile" accept="image/*" hidden>
+<div class="zoomRow" id="zoomRow" hidden><span aria-hidden="true">−</span><input type="range" id="frameZoom" min="1" max="3" step="0.01" value="1" aria-label="Zoom photo"/><span aria-hidden="true">+</span></div>
+<button class="btn g" id="frameDownload" hidden>DOWNLOAD PNG</button>
+<p class="fnote">Drag the photo to reposition it · pinch or use the slider to zoom</p>
+</div>
+</div></section>
 
 <section id="examroad" class="rv"><h2>IN SEARCH OF GRADUATION</h2><p class="sub">Six stops on the map, then the cap goes up. Each one checks itself off once the exam ends.</p>
 <div class="examroad"><div class="stops" id="stops"></div></div></section>
