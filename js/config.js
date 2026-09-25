@@ -6,10 +6,11 @@ window.SITE = {
   name: "طب الأزهر دمياط",
   logo: "assets/logo.png",                              // e.g. assets/logo.png  (empty = "YOUR LOGO" placeholder)
   frame: "assets/frame.png",             // square (1:1) PNG with a transparent middle — visitors upload a photo that sits behind it
+  frameOpens: "2026-12-01T00:00:00",     // Frame tool stays locked with a "coming soon" overlay until this date/time. Leave "" to unlock it right away.
   date: "2026-12-19T13:00:00",           // graduation date & time
   since: "2021-10-10",                   // "days since" counter
   music: "assets/audio/music.mp3",       // put your mp3 here (plays with the intro)
-  gradsound: "assets/audio/grad.mp3",                         // graduation-day sound, e.g. assets/audio/grad.mp3
+  gradsound: "",                         // graduation-day sound, e.g. assets/audio/grad.mp3
   milestones: ``,                        // countdown sounds, one per line: 50=assets/audio/50days.mp3
   backend: "https://script.google.com/macros/s/AKfycbxYJoeSWfvarj8VhskJCy0itEOVrqHbJgcDn2LxSX38wVPdDnpCHOTK6XNGAYOkfafk/exec",                           // Google Apps Script Web app URL (see README.md)
 

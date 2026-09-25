@@ -4,7 +4,7 @@ const LN=k=>G(k).split(/\n+/).map(x=>x.trim()).filter(Boolean);
 const KV=k=>{const o={};LN(k).forEach(x=>{const i=x.indexOf('=');if(i>0)o[x.slice(0,i).trim().toLowerCase()]=x.slice(i+1).trim()});return o};
 const PP=k=>LN(k).map(x=>x.split('|').map(t=>t.trim()));
 const DR=(u,img)=>{const m=/drive\.google\.com.*?(?:\/d\/|[?&]id=)([\w-]+)/.exec(u||'');return m?(img?'https://lh3.googleusercontent.com/d/'+m[1]+'=w800':'https://drive.google.com/uc?export=download&id='+m[1]):u};
-const CONFIG={className:G('name')||"CLASS OF 2026",graduationDate:G('date')||"2026-12-19T13:00:00",logo:DR(G('logo'),1),frame:DR(G('frame'),1),backgroundMusic:DR(G('music')),graduationSound:DR(G('gradsound')),socials:KV('social')};
+const CONFIG={className:G('name')||"CLASS OF 2026",graduationDate:G('date')||"2026-12-19T13:00:00",logo:DR(G('logo'),1),frame:DR(G('frame'),1),frameOpens:G('frameOpens'),backgroundMusic:DR(G('music')),graduationSound:DR(G('gradsound')),socials:KV('social')};
 const BU=G('backend'),BACKEND={enabled:/^https:\/\/script\.google\.com\//i.test(BU),apiUrl:BU};
 const MS=KV('milestones'),COUNTDOWN_MILESTONES={};Object.keys(MS).forEach(k=>COUNTDOWN_MILESTONES[+k]={sound:DR(MS[k])});
 const EVENTS=PP('events').filter(a=>a.length>2).map(a=>({e:a[0],t:a[1],d:a[2].replace(' ','T'),l:a[3]||'',x:a[4]||''}));
@@ -214,6 +214,17 @@ $('#af').onsubmit=async e=>{e.preventDefault();const f=$('#pf').files[0];if(!f||
  dlBtn.onclick=()=>{if(!img)return;const a=el('a');a.href=canvas.toDataURL('image/png');
   a.download=(CONFIG.className||'class').toLowerCase().replace(/[^a-z0-9]+/g,'-')+'-frame.png';a.click()};
  draw();
+})();
+
+/* ---- frame lock: keep Frame Your Photo behind a "coming soon" overlay until the configured date ---- */
+(function(){
+ const wrap=$('#frameWrap'),lock=$('#frameLock');if(!wrap||!lock)return;
+ const has=ok(CONFIG.frameOpens),openAt=has?new Date(CONFIG.frameOpens).getTime():0;
+ if(has)$('#frameLockDate').textContent=fmt(CONFIG.frameOpens);
+ function check(){const locked=has&&Date.now()<openAt;
+  lock.hidden=!locked;wrap.classList.toggle('locked',locked);
+  if(locked)wrap.setAttribute('inert','');else wrap.removeAttribute('inert')}
+ check();if(has)setInterval(check,30000);
 })();
 
 /* ---- by the numbers: days since the start date (live) + infinity stats from the Layout gadget ---- */

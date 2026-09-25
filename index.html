@@ -51,7 +51,7 @@
 <div class="row"><span id="cnt" class="cnt"></span><button class="btn" id="more">SHOW MORE MEMORIES</button><button class="btn g" id="add">+ ADD YOUR MEMORY</button></div></section>
 
 <section id="frame" class="rv"><h2>FRAME YOUR PHOTO</h2><p class="sub">Upload your photo, drag to fit the square, and download your own framed picture.</p>
-<div class="framewrap">
+<div class="framewrap" id="frameWrap">
 <div class="frameStage" id="frameStage"><canvas id="frameCanvas" width="1600" height="1600"></canvas><div class="frameHint" id="frameHint">Tap to add your photo</div></div>
 <div class="frameControls">
 <label class="btn" for="frameFile" id="frameChoose">CHOOSE YOUR PHOTO</label><input type="file" id="frameFile" accept="image/*" hidden>
@@ -59,6 +59,7 @@
 <button class="btn g" id="frameDownload" hidden>DOWNLOAD PNG</button>
 <p class="fnote">Drag the photo to reposition it · pinch or use the slider to zoom</p>
 </div>
+<div class="lockOverlay" id="frameLock" hidden><div class="lockBox"><span class="eyebrow">COMING SOON</span><span class="lk" aria-hidden="true">🔒</span><b>Frame Your Photo is Locked</b><p>It unlocks on <span id="frameLockDate"></span> — come back then to add your photo.</p></div></div>
 </div></section>
 
 <section id="examroad" class="rv"><h2>IN SEARCH OF GRADUATION</h2><p class="sub">Six stops on the map, then the cap goes up. Each one checks itself off once the exam ends.</p>
