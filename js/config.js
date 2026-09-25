@@ -6,17 +6,16 @@ window.SITE = {
   name: "طب الأزهر دمياط",
   logo: "assets/logo.png",                              // e.g. assets/logo.png  (empty = "YOUR LOGO" placeholder)
   frame: "assets/frame.png",             // square (1:1) PNG with a transparent middle — visitors upload a photo that sits behind it
-  frameOpens: "2026-12-01T00:00:00",     // Frame tool stays locked with a "coming soon" overlay until this date/time. Leave "" to unlock it right away.
+  frameOpens: "2026-12-18T00:00:00",     // Frame tool stays locked with a "coming soon" overlay until this date/time. Leave "" to unlock it right away.
   date: "2026-12-19T13:00:00",           // graduation date & time
   since: "2021-10-10",                   // "days since" counter
   music: "assets/audio/music.mp3",       // put your mp3 here (plays with the intro)
-  gradsound: "",                         // graduation-day sound, e.g. assets/audio/grad.mp3
+  gradsound: "assets/audio/grad.mp3",                         // graduation-day sound, e.g. assets/audio/grad.mp3
   milestones: ``,                        // countdown sounds, one per line: 50=assets/audio/50days.mp3
   backend: "https://script.google.com/macros/s/AKfycbxYJoeSWfvarj8VhskJCy0itEOVrqHbJgcDn2LxSX38wVPdDnpCHOTK6XNGAYOkfafk/exec",                           // Google Apps Script Web app URL (see README.md)
 
   intro: `SENIORS 2026
 5 years. 10 semesters. One dream.
-Countless coffees. Zero sleep.
 A thousand memories.
 THE LAST CHAPTER BEGINS`,
 
@@ -36,8 +35,6 @@ graduation_cap | YEAR 5 | The Final Chapter | The final exams, the endless rotat
 
   stats: `hot_beverage | Cups of coffee | ∞
 sleeping_face | Hours of sleep we never got | ∞
-memo | Pages highlighted | ∞
-pizza | Late-night snacks | ∞
 brain | Facts memorized, then forgotten | ∞
 stethoscope | Promises of "just one more chapter" | ∞`,
 
@@ -53,8 +50,7 @@ party_popper | Graduation Ceremony | 2026-12-19 13:00 | College | The chapter is
 
   polls: `خد من الكلية ايه؟ | مدمن كافيين | اقرعيت من الصلع الوراثي | بتسف بنادول | ارق ومعرفش انام  
 كام مره طبقت ف الامتحانات؟ | ولا مرة | مرتين او تلاتة | كتير | يعني ايه نوم  
-دمياط هتوحشك | لا | نو | طبعا لا | ممكن 
-PRIMARY CAFFEINE SOURCE? | Coffee | Energy Drinks | Tea | Pure Willpower`,
+دمياط هتوحشك | لا | no | Nein  | ممكن `,
 
   cats: `FIRST DAY, SENIOR JACKET, GRADUATION JACKET, OSCE, EVENTS, LECTURES, HOSPITAL, CLINICAL YEARS, FRIENDS, TRIPS, PARTIES, FUNNY MOMENTS, GRADUATION`,
 
