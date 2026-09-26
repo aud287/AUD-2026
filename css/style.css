@@ -116,17 +116,25 @@ footer{position:relative;z-index:1;text-align:center;padding:60px 4vw 50px}foote
 dialog{border:0;border-radius:22px;padding:0;width:min(92vw,520px);background:var(--iv);color:var(--ink);box-shadow:0 30px 80px #0008}
 dialog::backdrop{background:#3a1f26cc}.dlg{padding:20px;position:relative}.cl{position:absolute;top:10px;right:10px;z-index:3}
 /* =========================================================
-   MEMORY GALLERY — GLASS MORPHISM
+   MEMORY GALLERY
+   LIQUID GLASS / APPLE-STYLE PHOTO VIEWER
+   ========================================================= */
+
+
+/* =========================================================
+   GALLERY WINDOW
    ========================================================= */
 
 dialog.gallery {
     position: fixed;
+
     top: 50%;
     left: 50%;
+
     transform: translate(-50%, -50%);
 
-    width: min(94vw, 1500px);
-    height: min(94vh, 900px);
+    width: min(92vw, 1120px);
+    height: min(92vh, 820px);
 
     max-width: none;
     max-height: none;
@@ -134,121 +142,224 @@ dialog.gallery {
     margin: 0;
     padding: 0;
 
-    border: 1px solid #ffffffaa;
-    border-radius: 30px;
+    border: 1px solid #ffffff80;
 
-    background:
-        linear-gradient(
-            135deg,
-            #fbf4e9d9,
-            #ffffff8c
-        );
-
-    color: var(--ink);
+    border-radius: 32px;
 
     overflow: hidden;
 
-    box-shadow:
-        0 30px 80px #3a1f2655,
-        inset 0 1px 0 #ffffffcc;
+    /*
+       Liquid glass background
+    */
+    background:
+        linear-gradient(
+            135deg,
+            #ffffff5c,
+            #fbf4e92e 45%,
+            #ffffff42
+        );
 
-    -webkit-backdrop-filter: blur(22px) saturate(120%);
-    backdrop-filter: blur(22px) saturate(120%);
+    /*
+       Blur behind the glass
+    */
+    -webkit-backdrop-filter:
+        blur(28px)
+        saturate(150%);
+
+    backdrop-filter:
+        blur(28px)
+        saturate(150%);
+
+    /*
+       Depth
+    */
+    box-shadow:
+        0 35px 90px #3a1f2655,
+        0 10px 35px #3a1f2625,
+        inset 0 1px 0 #ffffffaa,
+        inset 0 -1px 0 #ffffff25;
+
+    color: var(--ink);
 
     z-index: 9999;
 }
 
 
-/* خلفية الشاشة */
+/* =========================================================
+   BACKDROP
+   ========================================================= */
 
 dialog.gallery::backdrop {
-    background: #3a1f26b8;
 
-    -webkit-backdrop-filter: blur(12px);
-    backdrop-filter: blur(12px);
+    background:
+        radial-gradient(
+            circle at 50% 35%,
+            #8f244055,
+            #3a1f26d9 85%
+        );
+
+    -webkit-backdrop-filter: blur(14px);
+
+    backdrop-filter: blur(14px);
 }
 
 
-/* الحاوية الداخلية */
+/* =========================================================
+   LIQUID GLASS HIGHLIGHT
+   ========================================================= */
+
+dialog.gallery::before {
+
+    content: "";
+
+    position: absolute;
+
+    inset: 0;
+
+    pointer-events: none;
+
+    z-index: 0;
+
+    background:
+
+        radial-gradient(
+            ellipse at 50% -15%,
+            #ffffff85 0%,
+            #ffffff30 22%,
+            transparent 55%
+        ),
+
+        radial-gradient(
+            ellipse at 5% 50%,
+            #ffffff25,
+            transparent 35%
+        ),
+
+        radial-gradient(
+            ellipse at 100% 80%,
+            #c8a25a20,
+            transparent 35%
+        );
+
+}
+
+
+/* =========================================================
+   INNER CONTAINER
+   ========================================================= */
 
 dialog.gallery .dlg {
+
     position: relative;
+
+    z-index: 1;
 
     width: 100%;
     height: 100%;
 
-    padding: 18px 26px 14px;
+    padding:
+        24px
+        34px
+        20px;
 
     display: flex;
+
     flex-direction: column;
 
     overflow: hidden;
 }
 
 
-/* ---------------------------------------------------------
-   CLOSE
-   --------------------------------------------------------- */
+/* =========================================================
+   CLOSE BUTTON
+   ========================================================= */
 
 dialog.gallery .ib.cl {
+
     position: absolute;
 
-    top: 14px;
-    right: 16px;
-
-    width: 48px;
-    height: 48px;
-
-    border-radius: 50%;
-
-    background: #ffffff55;
-
-    border: 1px solid #8f244044;
-
-    -webkit-backdrop-filter: blur(12px);
-    backdrop-filter: blur(12px);
-
-    color: var(--wine);
-
-    font-size: 24px;
+    top: 18px;
+    right: 20px;
 
     z-index: 20;
 
+    width: 46px;
+    height: 46px;
+
+    border-radius: 50%;
+
+    display: grid;
+
+    place-items: center;
+
+    background:
+        #ffffff38;
+
+    border:
+        1px solid #ffffff88;
+
+    color: var(--wine);
+
+    font-size: 22px;
+
+    box-shadow:
+        0 8px 22px #3a1f2620,
+        inset 0 1px 0 #ffffff90;
+
+    -webkit-backdrop-filter: blur(18px);
+
+    backdrop-filter: blur(18px);
+
     transition:
-        transform .3s var(--e),
-        background .3s var(--e);
+        transform .35s var(--e),
+        background .35s var(--e),
+        box-shadow .35s var(--e);
 }
 
 dialog.gallery .ib.cl:hover {
-    transform: rotate(90deg) scale(1.08);
-    background: #ffffffaa;
+
+    transform:
+        rotate(90deg)
+        scale(1.08);
+
+    background:
+        #ffffff72;
+
+    box-shadow:
+        0 12px 30px #3a1f2630,
+        inset 0 1px 0 #ffffffcc;
 }
 
 
-/* ---------------------------------------------------------
+/* =========================================================
    MAIN PHOTO AREA
-   --------------------------------------------------------- */
+   ========================================================= */
 
 dialog.gallery .lbmain {
+
     position: relative;
 
     flex: 1;
+
     min-height: 0;
 
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    width: 100%;
 
-    gap: 12px;
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
 
     touch-action: pan-y;
 }
 
 
-/* محتوى الصورة */
+/* =========================================================
+   CONTENT
+   ========================================================= */
 
 dialog.gallery #lbc {
-    flex: 1;
 
     width: 100%;
     height: 100%;
@@ -257,202 +368,360 @@ dialog.gallery #lbc {
     min-height: 0;
 
     display: flex;
+
     flex-direction: column;
 
     align-items: center;
+
     justify-content: center;
 
     text-align: center;
 }
 
 
-/* ---------------------------------------------------------
-   BIG PHOTO
-   --------------------------------------------------------- */
+/* =========================================================
+   MAIN IMAGE
+   ========================================================= */
 
 dialog.gallery .ph.big {
-    width: min(78vw, 1050px);
+
+    position: relative;
+
+    width: min(76vw, 790px);
 
     /*
-       الصورة تاخد معظم مساحة الـ modal
+       الصورة تاخد معظم الارتفاع
     */
-    height: min(72vh, 690px);
+    height: min(64vh, 575px);
 
-    max-width: calc(100% - 90px);
+    max-width: calc(100% - 110px);
+
+    max-height: 64vh;
 
     aspect-ratio: auto;
-
-    overflow: hidden;
 
     display: flex;
 
     align-items: center;
+
     justify-content: center;
+
+    overflow: hidden;
 
     margin: 0 auto;
 
-    border-radius: 20px;
+    border-radius: 24px;
 
-    background: #ffffff18;
+    /*
+       Very subtle glass frame
+    */
+    background:
+        #ffffff18;
 
-    border: 1px solid #ffffff55;
+    border:
+        1px solid #ffffff60;
 
     box-shadow:
-        0 22px 55px #3a1f2640,
-        0 4px 15px #3a1f2618;
+        0 25px 55px #3a1f2640,
+        0 8px 22px #3a1f2620,
+        inset 0 1px 0 #ffffff70;
+
+    isolation: isolate;
 }
 
 
-/* الصورة نفسها */
+/* IMAGE */
 
 dialog.gallery .ph.big > * {
+
     width: 100%;
     height: 100%;
 
     max-width: none;
     max-height: none;
 
+    display: block;
+
     object-fit: contain;
 
-    border-radius: 18px;
+    object-position: center;
+
+    border-radius: 22px;
 
     box-shadow: none;
 
-    background: #ffffff0d;
+    background:
+        #ffffff0d;
 
     transition:
-        opacity .25s var(--e),
+        opacity .3s var(--e),
         transform .5s var(--e);
 }
 
 
-/* ---------------------------------------------------------
-   TITLE / AUTHOR / DATE
-   --------------------------------------------------------- */
+/*
+   tiny premium zoom
+*/
 
-dialog.gallery #lbc h3 {
-    margin-top: 7px;
+dialog.gallery .ph.big:hover > * {
 
-    font-size: clamp(22px, 2.2vw, 30px);
-
-    line-height: 1;
-
-    text-align: center;
-
-    color: var(--wine);
+    transform: scale(1.008);
 }
 
 
-dialog.gallery #lbc p {
-    margin-top: 3px;
+/* =========================================================
+   NAVIGATION ARROWS
+   ========================================================= */
 
-    font-size: 16px;
-
-    line-height: 1;
-
-    text-align: center;
-
-    color: var(--ink);
-}
-
-
-dialog.gallery #lbc > small {
-    display: block;
-
-    margin-top: 7px;
-
-    font-size: 12px;
-
-    letter-spacing: .04em;
-
-    opacity: .7;
-
-    text-align: center;
-}
-
-
-/* ---------------------------------------------------------
-   NAVIGATION BUTTONS
-   --------------------------------------------------------- */
+/*
+   خلي الأسهم ملاصقة تقريبًا للصورة،
+   مش لأطراف الـ dialog
+*/
 
 dialog.gallery .navb {
-    flex: 0 0 auto;
 
-    width: 54px;
-    height: 54px;
+    position: absolute;
+
+    top: 50%;
+
+    transform: translateY(-50%);
+
+    z-index: 10;
+
+    width: 50px;
+    height: 50px;
 
     border-radius: 50%;
 
     display: grid;
+
     place-items: center;
 
-    border: 1px solid #8f244044;
+    border:
+        1px solid #ffffff88;
 
-    background: #ffffff55;
+    background:
+        #ffffff42;
 
-    color: var(--wine);
+    color:
+        var(--wine);
 
-    font-size: 28px;
+    font-size: 29px;
+
     line-height: 1;
 
-    -webkit-backdrop-filter: blur(12px);
-    backdrop-filter: blur(12px);
-
     box-shadow:
-        0 8px 22px #6b1a2e18;
+        0 10px 28px #3a1f2630,
+        inset 0 1px 0 #ffffffaa;
+
+    -webkit-backdrop-filter: blur(18px);
+
+    backdrop-filter: blur(18px);
 
     transition:
         transform .3s var(--e),
         background .3s var(--e),
-        color .3s var(--e);
+        box-shadow .3s var(--e);
 }
+
+
+/*
+   الأسهم متوزعة حول الصورة
+*/
+
+dialog.gallery .prevb {
+
+    left:
+        max(
+            18px,
+            calc(
+                50% - min(38vw,395px) - 75px
+            )
+        );
+}
+
+dialog.gallery .nextb {
+
+    right:
+        max(
+            18px,
+            calc(
+                50% - min(38vw,395px) - 75px
+            )
+        );
+}
+
 
 dialog.gallery .navb:hover {
-    background: #ffffffaa;
 
-    color: var(--wine);
+    background:
+        #ffffff75;
 
-    transform: scale(1.08);
+    box-shadow:
+        0 14px 32px #3a1f2638,
+        inset 0 1px 0 #ffffffcc;
 }
+
+
+dialog.gallery .prevb:hover {
+
+    transform:
+        translateY(-50%)
+        translateX(-3px)
+        scale(1.08);
+}
+
+
+dialog.gallery .nextb:hover {
+
+    transform:
+        translateY(-50%)
+        translateX(3px)
+        scale(1.08);
+}
+
 
 dialog.gallery .navb:active {
-    transform: scale(.94);
+
+    transform:
+        translateY(-50%)
+        scale(.94);
 }
 
 
-/* ---------------------------------------------------------
+/* =========================================================
+   TITLE
+   ========================================================= */
+
+dialog.gallery #lbc h3 {
+
+    margin:
+        9px 0 0;
+
+    padding: 0;
+
+    font-family:
+        'Playfair Display',
+        var(--ar),
+        Georgia,
+        serif;
+
+    font-size:
+        clamp(22px, 2.2vw, 30px);
+
+    line-height: 1;
+
+    font-weight: 800;
+
+    color:
+        var(--wine);
+
+    text-align: center;
+
+    text-shadow:
+        0 1px 10px #ffffff55;
+}
+
+
+/* =========================================================
+   AUTHOR
+   ========================================================= */
+
+dialog.gallery #lbc p {
+
+    margin:
+        4px 0 0;
+
+    font-family:
+        'DM Sans',
+        var(--ar),
+        system-ui,
+        sans-serif;
+
+    font-size: 15px;
+
+    line-height: 1;
+
+    color:
+        var(--ink);
+
+    opacity: .9;
+
+    text-align: center;
+}
+
+
+/* =========================================================
+   METADATA
+   ========================================================= */
+
+dialog.gallery #lbc > small {
+
+    display: block;
+
+    margin:
+        8px 0 0;
+
+    font-family:
+        'DM Sans',
+        var(--ar),
+        system-ui,
+        sans-serif;
+
+    font-size: 11px;
+
+    font-weight: 700;
+
+    letter-spacing: .07em;
+
+    color:
+        var(--wine);
+
+    opacity: .65;
+
+    text-align: center;
+}
+
+
+/* =========================================================
    COUNTER
-   --------------------------------------------------------- */
+   ========================================================= */
 
 dialog.gallery .idx {
+
     flex: 0 0 auto;
 
     display: block;
 
+    margin:
+        6px 0 5px;
+
     text-align: center;
 
-    margin: 5px 0 5px;
+    font-size: 11px;
 
     font-weight: 700;
 
-    letter-spacing: .08em;
+    letter-spacing: .12em;
+
+    color:
+        var(--wine);
 
     opacity: .55;
-
-    font-size: 12px;
 }
 
 
-/* ---------------------------------------------------------
+/* =========================================================
    THUMBNAILS
-   --------------------------------------------------------- */
+   ========================================================= */
 
 dialog.gallery .strip {
+
     flex: 0 0 auto;
 
     width: 100%;
 
-    height: 70px;
+    height: 64px;
 
     display: flex;
 
@@ -462,12 +731,16 @@ dialog.gallery .strip {
 
     gap: 9px;
 
+    padding:
+        3px
+        45px
+        2px;
+
+    margin: 0;
+
     overflow-x: auto;
+
     overflow-y: hidden;
-
-    padding: 5px 40px 3px;
-
-    margin-top: 2px;
 
     scroll-snap-type: x proximity;
 
@@ -476,149 +749,300 @@ dialog.gallery .strip {
     scrollbar-width: none;
 }
 
+
 dialog.gallery .strip::-webkit-scrollbar {
+
     display: none;
 }
 
 
-/* thumbnail */
+/* =========================================================
+   THUMBNAIL BUTTON
+   ========================================================= */
 
 dialog.gallery .strip button {
-    flex: 0 0 auto;
 
-    width: 58px;
-    height: 58px;
+    flex:
+        0 0 54px;
+
+    width: 54px;
+    height: 54px;
 
     padding: 0;
 
     overflow: hidden;
 
-    border-radius: 11px;
+    border-radius: 13px;
 
-    border: 1px solid #ffffff88;
+    border:
+        1px solid #ffffff70;
 
-    background: #ffffff38;
+    background:
+        #ffffff30;
 
-    opacity: .52;
-
-    -webkit-backdrop-filter: blur(8px);
-    backdrop-filter: blur(8px);
+    opacity: .48;
 
     box-shadow:
-        0 5px 15px #3a1f2615;
+        0 6px 16px #3a1f2618,
+        inset 0 1px 0 #ffffff60;
+
+    -webkit-backdrop-filter:
+        blur(10px);
+
+    backdrop-filter:
+        blur(10px);
 
     transition:
-        transform .25s var(--e),
-        opacity .25s var(--e),
-        box-shadow .25s var(--e),
-        border-color .25s var(--e);
+        transform .3s var(--e),
+        opacity .3s var(--e),
+        box-shadow .3s var(--e),
+        border-color .3s var(--e);
 }
 
 
-/* thumbnail image */
+/* THUMBNAIL IMAGE */
 
 dialog.gallery .strip button img,
 dialog.gallery .strip button span {
+
     width: 100%;
     height: 100%;
 
     display: block;
 
     object-fit: cover;
+
+    border-radius: 12px;
 }
 
 
-/* hover */
+/* HOVER */
 
 dialog.gallery .strip button:hover {
-    opacity: .95;
 
-    transform: translateY(-3px);
+    opacity: .9;
+
+    transform:
+        translateY(-4px)
+        scale(1.04);
 
     box-shadow:
-        0 9px 20px #3a1f2628;
+        0 12px 24px #3a1f2630,
+        inset 0 1px 0 #ffffffaa;
 }
 
 
-/* active thumbnail */
+/* =========================================================
+   ACTIVE THUMBNAIL
+   ========================================================= */
 
 dialog.gallery .strip button.on {
+
     opacity: 1;
 
-    border: 2px solid var(--gold);
+    transform:
+        translateY(-4px)
+        scale(1.08);
+
+    border:
+        2px solid var(--gold);
 
     box-shadow:
-        0 5px 15px #0003,
-        0 0 0 3px #c8a25a33;
 
-    transform: translateY(-3px) scale(1.05);
+        0 10px 24px #3a1f2635,
+
+        0 0 0 3px #c8a25a38,
+
+        inset 0 1px 0 #ffffffbb;
 }
 
 
-/* ---------------------------------------------------------
+/* =========================================================
    MOBILE
-   --------------------------------------------------------- */
+   ========================================================= */
 
-@media(max-width:640px) {
+@media(max-width:700px) {
 
     dialog.gallery {
+
         width: 96vw;
+
         height: 94vh;
 
-        border-radius: 24px;
+        border-radius: 26px;
     }
+
 
     dialog.gallery .dlg {
-        padding: 12px 10px 10px;
+
+        padding:
+            18px
+            12px
+            12px;
     }
 
-    dialog.gallery .ph.big {
-        width: 90vw;
-        height: 66vh;
 
-        max-width: calc(100% - 60px);
+    dialog.gallery .ph.big {
+
+        width: 88vw;
+
+        height: min(61vh, 520px);
+
+        max-width:
+            calc(100% - 55px);
+
+        border-radius: 18px;
+    }
+
+
+    dialog.gallery .ph.big > * {
 
         border-radius: 16px;
     }
 
-    dialog.gallery .ph.big > * {
-        border-radius: 14px;
-    }
 
     dialog.gallery .navb {
-        width: 42px;
-        height: 42px;
 
-        font-size: 23px;
+        width: 43px;
+        height: 43px;
+
+        font-size: 24px;
     }
 
+
+    dialog.gallery .prevb {
+
+        left: 2px;
+    }
+
+
+    dialog.gallery .nextb {
+
+        right: 2px;
+    }
+
+
+    dialog.gallery .ib.cl {
+
+        top: 12px;
+        right: 12px;
+
+        width: 42px;
+        height: 42px;
+    }
+
+
     dialog.gallery .strip {
-        height: 62px;
 
         justify-content: flex-start;
 
         gap: 7px;
 
-        padding: 3px 20px;
+        height: 60px;
+
+        padding:
+            3px
+            20px;
     }
+
 
     dialog.gallery .strip button {
-        width: 50px;
-        height: 50px;
 
-        border-radius: 9px;
+        flex-basis: 48px;
+
+        width: 48px;
+        height: 48px;
+
+        border-radius: 10px;
     }
 
+
     dialog.gallery #lbc h3 {
+
         font-size: 22px;
     }
 
+
     dialog.gallery #lbc p {
+
         font-size: 14px;
     }
 
+
     dialog.gallery #lbc > small {
+
+        font-size: 9.5px;
+    }
+}
+/* =========================================================
+   THREE PART PHOTO INFO
+   ========================================================= */
+
+dialog.gallery .lbmeta {
+
+    width: min(650px, 80%);
+
+    margin-top: 10px;
+
+    display: grid;
+
+    grid-template-columns:
+        1fr
+        1fr
+        1fr;
+
+    align-items: center;
+
+    text-align: center;
+
+    font-family:
+        'DM Sans',
+        var(--ar),
+        system-ui,
+        sans-serif;
+
+    font-size: 12px;
+
+    font-weight: 700;
+
+    color: var(--ink);
+
+    opacity: .78;
+}
+
+
+dialog.gallery .lbmeta span {
+
+    white-space: nowrap;
+
+    padding: 0 10px;
+}
+
+
+dialog.gallery .lbmeta span:nth-child(2) {
+
+    color: var(--wine);
+
+    letter-spacing: .08em;
+}
+
+
+/* Mobile */
+
+@media(max-width:600px) {
+
+    dialog.gallery .lbmeta {
+
+        width: 94%;
+
         font-size: 10px;
+
+        margin-top: 8px;
+    }
+
+    dialog.gallery .lbmeta span {
+
+        padding: 0 4px;
     }
 }
 #toast{position:fixed;left:50%;bottom:22px;transform:translate(-50%,30px);z-index:120;background:var(--wine);color:#fff;padding:11px 20px;border-radius:99px;opacity:0;pointer-events:none;transition:.4s var(--e);max-width:90vw}
