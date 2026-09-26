@@ -49,7 +49,7 @@ function toast(t,ms){const x=$('#toast');x.textContent=t;x.classList.add('on');c
 $$('.cn').forEach(e=>e.textContent=CONFIG.className);
 $$('.gd').forEach(e=>e.textContent=gd.toLocaleDateString('en-GB',{day:'numeric',month:'long',year:'numeric'}).toUpperCase());
 $$('.gs').forEach(e=>e.textContent=gd.toLocaleDateString('en-GB').replace(/\//g,'.'));
-$$('.class-logo').forEach(d=>{if(ok(CONFIG.logo)){const i=new Image();i.src=CONFIG.logo;i.alt='Class logo';d.append(i)}else{d.textContent='YOUR LOGO';d.classList.add('placeholder')}});
+$$('.class-logo').forEach(d=>{if(ok(CONFIG.logo)){const i=new Image();i.decoding='async';i.src=CONFIG.logo;i.alt='Class logo';d.append(i)}else{d.textContent='YOUR LOGO';d.classList.add('placeholder')}});
 
 /* ---- audio + cinematic intro (runs on EVERY load; music starts automatically, or on the first tap if the browser blocks it) ---- */
 const bg=new Audio();bg.loop=true;bg.volume=.55;const HM=ok(CONFIG.backgroundMusic);if(HM)bg.src=CONFIG.backgroundMusic;
@@ -326,6 +326,8 @@ ANNOUNCEMENTS.forEach(a => {
 
     const i = new Image();
 
+    i.loading = 'lazy';
+    i.decoding = 'async';
     i.src = a.image;
     i.alt = '';
 
