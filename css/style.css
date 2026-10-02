@@ -261,7 +261,7 @@ dialog.gallery::before {
 dialog.gallery .dlg {
 
     position: relative;
-
+background: transparent;
     z-index: 1;
 
     width: 100%;
