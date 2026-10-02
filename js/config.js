@@ -52,7 +52,7 @@ party_popper | Graduation Ceremony | 2026-12-19 13:00 | College | The chapter is
 كام مره طبقت ف الامتحانات؟ | ولا مرة | مرتين او تلاتة | كتير | يعني ايه نوم  
 دمياط هتوحشك | لا | no | Nein  | ممكن `,
 
-  cats: `FIRST DAY, SENIOR JACKET, GRADUATION JACKET, OSCE, EVENTS, LECTURES, HOSPITAL, CLINICAL YEARS, FRIENDS, TRIPS, PARTIES, FUNNY MOMENTS, GRADUATION`,
+  cats: `FIRST DAY, SENIOR JACKET, OSCE, LECTURES, HOSPITAL, SENIORS CHILD, FRIENDS, FUNNY MOMENTS, GRADUATION`,
 
   /* exam roadmap: icon | Subject name | YYYY-MM-DD  — each gets an automatic ✓ once its exam
      day passes 2:00 PM. Icons here are the flat/grainy set in assets/icons (heart_pulse,
