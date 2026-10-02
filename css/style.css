@@ -114,7 +114,17 @@ input,textarea,select{width:100%;padding:12px 14px;border-radius:12px;border:1.5
 .soc{display:flex;align-items:center;gap:12px;text-decoration:none;color:var(--wine);font-weight:700}.soc span{font-size:30px}
 footer{position:relative;z-index:1;text-align:center;padding:60px 4vw 50px}footer .btn{margin-top:14px}
 dialog{border:0;border-radius:22px;padding:0;width:min(92vw,520px);background:var(--iv);color:var(--ink);box-shadow:0 30px 80px #0008}
-dialog::backdrop{background:#3a1f26cc}.dlg{padding:20px;position:relative}.cl{position:absolute;top:10px;right:10px;z-index:3}
+dialog::backdrop{background:#3a1f26cc}.dlg{padding:20px;position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 600px;
+    max-width: 90vw;
+    max-height: 90vh;
+    overflow-y: auto;
+    z-index: 1000;
+    background: #ffffff;
+    border-radius: inherit;}.cl{position:absolute;top:10px;right:10px;z-index:3}
 /* =========================================================
    MEMORY GALLERY
    LIQUID GLASS / APPLE-STYLE PHOTO VIEWER
